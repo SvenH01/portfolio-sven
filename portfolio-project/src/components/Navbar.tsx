@@ -2,12 +2,36 @@ import {ReactNode, useState} from "react";
 
 
 const Navbar = (): ReactNode => {
-    const [showMobileNav, setShowMobileNav] = useState(true)
+    const [showMobileNav, setShowMobileNav] = useState(false)
 
+
+    const ComputerNavBar = () => (
+        <div className="w-full hidden sm:block md:w-auto" id="navbar-default">
+            <ul className="font-medium flex p-0 border-gray-100 rounded-lg flex-row space-x-8 mt-0 border-0 ">
+                <li>
+                    <a href="#"
+                       className="block rounded bg-transparent p-0 text-blue-500"
+                       aria-current="page">Home</a>
+                </li>
+                <li>
+                    <a href="#"
+                       className="hover:bg-transparent border-0 p-0 hover:text-blue-500">CV</a>
+                </li>
+                <li>
+                    <a href="#"
+                       className="hover:bg-transparent md:border-0 p-0 hover:text-blue-500">Learning goals</a>
+                </li>
+                <li>
+                    <a href="#"
+                       className="hover:bg-transparent border-0 p-0 hover:text-blue-500">Contact</a>
+                </li>
+            </ul>
+        </div>
+    )
     const MobileNavBar = () => {
         return (
-            <div className="w-full md:block md:w-auto" id="navbar-default">
-                <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+            <div className="w-full sm:hidden block md:w-auto absolute left-0 top-[60px] bg-white" id="navbar-default">
+                <ul className="font-medium flex flex-col p-4 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
                         <a href="#"
                            className="block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
@@ -48,6 +72,7 @@ const Navbar = (): ReactNode => {
                 </svg>
             </button>
             { showMobileNav ? <MobileNavBar/> : null}
+            <ComputerNavBar/>
         </div>
     </nav>
 )

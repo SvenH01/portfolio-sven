@@ -2,10 +2,11 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
+import bg_mobile from '~/assets/background_blob_mobile.svg'
 import bg from '~/assets/background_blob.svg'
 import type {CSSProperties} from "react";
 
-const style: CSSProperties = {
+const default_background_style: CSSProperties = {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg.src})`,
     width: "100%",
@@ -17,13 +18,28 @@ const style: CSSProperties = {
     animationDuration: "4s"
 }
 
+const mobile_background_style: CSSProperties = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
+    backgroundImage: `url(${bg_mobile.src})`,
+    width: "100%",
+    height: "100%",
+    backgroundSize: "cover",
+    position: "absolute",
+    zIndex: -1,
+    animation: "resize-intro",
+    animationDuration: "4s"
+}
+
+
+
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
     <main>
       <div className="flex min-h-screen flex-col">
-          <div style={style} className={"xxl:hidden"} id={'main-background'}/>
+          <div style={default_background_style} className={"hidden sm:block"} id={'main-background'}/>
+          <div style={mobile_background_style} className={"sm:hidden block"} id={'mobile-background'}/>
           <div id={'main-content'}>
               <Navbar/>
               <div className="container flex flex-col min-w-full items-center justify-center gap-12 px-4 py-16 ">

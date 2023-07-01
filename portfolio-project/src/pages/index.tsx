@@ -15,7 +15,8 @@ const default_background_style: CSSProperties = {
     position: "absolute",
     zIndex: -1,
     animation: "resize-intro",
-    animationDuration: "4s"
+    animationDuration: "4s",
+    overflow: "hidden"
 }
 
 const mobile_background_style: CSSProperties = {
@@ -27,7 +28,8 @@ const mobile_background_style: CSSProperties = {
     position: "absolute",
     zIndex: -1,
     animation: "resize-intro",
-    animationDuration: "4s"
+    animationDuration: "4s",
+    overflow: "hidden"
 }
 
 

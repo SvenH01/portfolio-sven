@@ -1,40 +1,38 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
-import Link from "next/link";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
 import bg from '~/assets/background_blob.svg'
+import type {CSSProperties} from "react";
+
+const style: CSSProperties = {
+    backgroundImage: `url(${bg.src})`,
+    width: "100%",
+    height: "100%",
+    backgroundSize: "cover",
+    position: "absolute",
+    zIndex: -1,
+    animation: "resize-intro",
+    animationDuration: "4s"
+}
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
-    <>
-      <main className="flex min-h-screen flex-col">
-          <div style={{
-              backgroundImage: `url(${bg.src})`,
-              width: "100%",
-              height: "100%",
-              backgroundSize: "cover",
-              position: "absolute",
-              zIndex: -1,
-              animation: "resize-intro",
-              animationDuration: "4s"
-          }} className={"xxl:hidden animate-pulse animate-once animate-duration-[6000ms]"} id={'main-background'}/>
+    <main>
+      <div className="flex min-h-screen flex-col">
+          <div style={style} className={"xxl:hidden"} id={'main-background'}/>
           <div id={'main-content'}>
               <Navbar/>
               <div className="container flex flex-col min-w-full items-center justify-center gap-12 px-4 py-16 ">
-                  <h1 className="text-5xl font-medium text-center md:px-40 tracking-tight sm:text-[5rem] animate-fade-up">
+                  <h1 className="text-5xl font-medium text-center py-40 md:px-40 tracking-tight sm:text-[5rem] animate-fade-up animate-duration-[6000ms]">
                       <span className="text-blue-800">Sven Hoving</span><br/>Software Developer
                   </h1>
                   <div className="flex">
                       <p className="font-Josefin font-semibold text-2xl text-center py-4">
 
                       </p>
-                  </div>
-                  <div>
-                      <h1 className="font-Oswald">Work in progress...</h1>
                   </div>
                   {/*<Link*/}
                   {/*  className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4"*/}
@@ -63,8 +61,11 @@ const Home: NextPage = () => {
                   {/*</div>*/}
               </div>
           </div>
-      </main>
-    </>
+      </div>
+        <div className="flex min-h-screen flex-col bg-[#0066FF]">
+            <h1 className="font-Oswald text-white text-center">Work in progress...</h1>
+        </div>
+    </main>
   );
 };
 

@@ -6,6 +6,7 @@ import bg from '~/assets/background_blob.svg'
 import type {CSSProperties} from "react";
 
 const style: CSSProperties = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg.src})`,
     width: "100%",
     height: "100%",

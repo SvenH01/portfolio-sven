@@ -16,6 +16,7 @@ const default_background_style: CSSProperties = {
     zIndex: -1,
     animation: "resize-intro",
     animationDuration: "4s",
+    maxWidth: "100vw",
     overflow: "hidden"
 }
 
@@ -29,6 +30,7 @@ const mobile_background_style: CSSProperties = {
     zIndex: -1,
     animation: "resize-intro",
     animationDuration: "4s",
+    maxWidth: "100vw",
     overflow: "hidden"
 }
 
@@ -39,10 +41,10 @@ const Home: NextPage = () => {
 
   return (
     <main>
-      <div className="flex min-h-screen flex-col">
+      <div className="min-h-screen max-h-screen min-w-full max-w-screen-md overflow-hidden">
           <div style={default_background_style} className={"hidden sm:block"} id={'main-background'}/>
           <div style={mobile_background_style} className={"sm:hidden block"} id={'mobile-background'}/>
-          <div id={'main-content'}>
+          <div id={'main-content overflow-hidden'}>
               <Navbar/>
               <div className="container flex flex-col min-w-full items-center justify-center gap-12 px-4 py-16 ">
                   <h1 className="text-5xl font-medium text-center py-40 md:px-40 tracking-tight sm:text-[5rem] animate-fade-up animate-duration-[6000ms]">

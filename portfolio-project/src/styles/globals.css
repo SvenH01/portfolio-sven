@@ -10,9 +10,9 @@ h1 {
 
 @keyframes resize-intro {
     0% {
-        background-size: 150%;
+        transform: scale(1.5);
     }
     100% {
-        background-size: 100%;
+        transform: scale(1);
     }
 }

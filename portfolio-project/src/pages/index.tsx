@@ -17,9 +17,10 @@ import Image from "next/image";
 const default_background_style: CSSProperties = {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg.src})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
     width: "100%",
     height: "100%",
-    backgroundSize: "cover",
     position: "absolute",
     zIndex: -1,
     animation: "resize-intro",
@@ -31,9 +32,10 @@ const default_background_style: CSSProperties = {
 const mobile_background_style: CSSProperties = {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg_mobile.src})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
     width: "100%",
     height: "100%",
-    backgroundSize: "cover",
     position: "absolute",
     zIndex: -1,
     animation: "resize-intro",

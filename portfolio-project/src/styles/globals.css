@@ -8,11 +8,28 @@ h1 {
     font-size: 4em;
 }
 
+.fade-right {
+    animation: "fade-right";
+    animation-duration: 4s;
+}
+
 @keyframes resize-intro {
     0% {
         transform: scale(1.5);
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes fade-right {
+    0% {
+        opacity: 0;
+        transform: translate(-2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
     }
 }

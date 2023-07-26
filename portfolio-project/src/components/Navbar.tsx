@@ -1,33 +1,48 @@
-import {ReactNode, useState} from "react";
+import {ReactElement, ReactNode, useMemo, useState} from "react";
 
+interface NavRoute {
+    name: string,
+    route: string
+}
 
-const Navbar = (): ReactNode => {
+const pages: {[id: string]: NavRoute} = {
+    "0": {name: "Home", route: "/"},
+    "1": {name: "Cv", route: "/cv"},
+    "2": {name: "Apps", route: "/apps"},
+}
+const Navbar = ({activePageId}: {activePageId: string | undefined}): ReactNode => {
     const [showMobileNav, setShowMobileNav] = useState(false)
 
 
-    const ComputerNavBar = () => (
+    const computerNavBar: ReactElement = useMemo(() => (
         <div className="w-full hidden sm:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex p-0 border-gray-100 rounded-lg flex-row space-x-8 mt-0 border-0 ">
-                <li>
-                    <a href="#"
-                       className="block rounded bg-transparent p-0 text-blue-500"
-                       aria-current="page">Home</a>
-                </li>
-                <li>
-                    <a href="#"
-                       className="hover:bg-transparent border-0 p-0 hover:text-blue-500">CV</a>
-                </li>
-                <li>
-                    <a href="#"
-                       className="hover:bg-transparent md:border-0 p-0 hover:text-blue-500">Learning goals</a>
-                </li>
-                <li>
-                    <a href="#"
-                       className="hover:bg-transparent border-0 p-0 hover:text-blue-500">Contact</a>
-                </li>
+                {
+                    Object.keys(pages).map( (pageId: string) => {
+                        const navRoute = pages[pageId]
+                        if (navRoute == undefined){
+                            return
+                        }
+
+                        if (activePageId == pageId) {
+                            return <li key={ `${pageId}.${navRoute.name || ''}`}>
+                                <a href={navRoute.route}
+                                   className="block rounded bg-transparent p-0 text-blue-500"
+                                   aria-current="page">{navRoute.name}</a>
+                            </li>
+                        }
+
+                        return <li key={ `${pageId}.${navRoute.name || ''}`}>
+                            <a href={navRoute.route}
+                               className="block rounded bg-transparent p-0 hover:text-blue-500"
+                               aria-current="page">{navRoute.name}</a>
+                        </li>
+                    })
+
+                }
             </ul>
         </div>
-    )
+    ), [activePageId])
     const MobileNavBar = () => {
         return (
             <div className="w-full sm:hidden block md:w-auto absolute left-0 top-[60px] bg-white" id="navbar-default">
@@ -43,18 +58,14 @@ const Navbar = (): ReactNode => {
                     </li>
                     <li>
                         <a href="#"
-                           className="block py-2 pl-3 pr-4 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Learning goals</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                           className="block py-2 pl-3 pr-4 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Apps</a>
                     </li>
                 </ul>
             </div>
         )}
 
     return (
-    <nav className="bg-white border-gray-200">
+    <nav className="bg-white border-gray-200 fixed z-10 w-full">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div className="flex items-center">
                 <span className="self-center text-2xl font-semibold whitespace-nowrap">svenhoving.com</span>
@@ -72,7 +83,7 @@ const Navbar = (): ReactNode => {
                 </svg>
             </button>
             { showMobileNav ? <MobileNavBar/> : null}
-            <ComputerNavBar/>
+            { computerNavBar }
         </div>
     </nav>
 )
